@@ -4,9 +4,9 @@ $serviceContainer->checkVersion('2.0.0-dev');
 $serviceContainer->setAdapterClass('teratour', 'mysql');
 $manager = new \Propel\Runtime\Connection\ConnectionManagerSingle();
 $manager->setConfiguration(array (
-  'dsn' => 'mysql:host=localhost;port=3306;dbname=teratour',
-  'user' => 'root',
-  'password' => '',
+  'dsn' => 'mysql:host=us-cdbr-iron-east-05.cleardb.net;port=3306;dbname=heroku_fecc38fe00a7499',
+  'user' => 'b88bc98d545c7c',
+  'password' => '062a2ce9',
   'settings' =>
   array (
     'charset' => 'utf8',
