@@ -20,7 +20,7 @@ function getMarkers($id){
     echo json_encode(['status'=>true,"data"=>$result]);
 }
 
-if (isset($_GET['id'])){
-    $id = $_GET['id'];
+if (isset($_GET['marker_id'])){
+    $id = $_GET['marker_id'];
     getMarkers($id);
 }
