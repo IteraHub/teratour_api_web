@@ -1,0 +1,7 @@
+/vendor
+/.idea
+/storage
+/.vscode
+Homestead.json
+Homestead.yaml
+.env
