@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Comments extends Migration
+class Media extends Migration
 {
     /**
      * Run the migrations.
@@ -14,13 +14,13 @@ class Comments extends Migration
     public function up()
     {
         //
-        Schema::create('comments',function(Blueprint $table){
+        Schema::create('media', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id');
+            $table->string('media_url');
             $table->unsignedInteger('post_id');
-            $table->string('text');
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
+        });
+        Schema::table('media', function (Blueprint $table) {
             $table->foreign('post_id')->references('id')->on('posts');
         });
     }

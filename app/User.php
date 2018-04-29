@@ -7,6 +7,9 @@ use Laravel\Lumen\Auth\Authorizable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use App\Post;
+use App\Comment;
+use App\Like;
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract
 {
@@ -36,5 +39,9 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     public function comments(){
         return $this->hasMany(Comment::class);
+    }
+
+    public function likes(){
+        return $this->hasMany(Like::class);
     }
 }

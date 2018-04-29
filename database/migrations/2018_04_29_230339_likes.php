@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Comments extends Migration
+class Likes extends Migration
 {
     /**
      * Run the migrations.
@@ -14,12 +14,13 @@ class Comments extends Migration
     public function up()
     {
         //
-        Schema::create('comments',function(Blueprint $table){
+        Schema::create('likes', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('post_id');
-            $table->string('text');
             $table->timestamps();
+        });
+        Schema::table('likes', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('post_id')->references('id')->on('posts');
         });

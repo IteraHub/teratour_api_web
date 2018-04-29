@@ -83,11 +83,6 @@ $app->singleton(
 
 //register logger
 
-$app->configureMonologUsing(function($monolog) {
-    $monolog->pushHandler(new \Monolog\Handler\StreamHandler('php://stderr', \Monolog\Logger::WARNING));
-    return $monolog;
-});
-
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes
