@@ -11,11 +11,6 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
-
-
 $router->get('/posts','PostController@index');
 $router->post('/posts','PostController@store');
 $router->get('/posts/{post}/comments','CommentController@index');
