@@ -14,14 +14,14 @@ class Users extends Migration
     public function up()
     {
         //
-        Schema::create('users',function(Blueprint $table){
+        Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('firstname');
             $table->string('lastname');
-            $table->string('about');
-            $table->string('location');
-            $table->string('dob');
-            $table->boolean('gender');
+            $table->string('about')->nullable();
+            $table->string('location')->nullable();
+            $table->string('dob')->nullable();
+            $table->boolean('gender')->nullable();
             $table->string('image_url')->nullable();
             $table->string('coverphoto_url')->nullable();
             $table->string('email');
@@ -30,8 +30,8 @@ class Users extends Migration
             $table->timestamps();
         });
 
-        Schema::table('users',function(Blueprint $table){
-            
+        Schema::table('users', function (Blueprint $table) {
+
         });
     }
 
