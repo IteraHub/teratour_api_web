@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -10,8 +11,14 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
+/**
+ * @var Illuminate\Support\Facades\Route $router
+ */
 
+$router->post('/user/register','UserController@register');
+$router->get('/user','UserController@index');
 $router->get('/posts','PostController@index');
 $router->post('/posts','PostController@store');
+
 $router->get('/posts/{post}/comments','CommentController@index');
 $router->post('/posts/{post}/comments','CommentController@store');
