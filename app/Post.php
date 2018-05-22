@@ -36,7 +36,15 @@ class Post extends Model{
         return $this->likes->count();
     }
     public function getLatestCommentAttribute(){
-        return Comment::wherePostId($this->id)
+        return Comment::with(['user'=>function($q){
+           $q->select([
+            "id",
+           "firstname",
+           "lastname",
+           "about","location","gender",
+           "image_url","coverphoto_url",
+           "username"]);
+        }])->wherePostId($this->id)
                     ->orderBy('id','desc')->first();
     }
     public function getLikedByUserAttribute(){
