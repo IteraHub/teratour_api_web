@@ -14,7 +14,7 @@ class Post extends Model{
         'title',
         "text"
     ];
-    protected $appends = ['total_likes'];
+    protected $appends = ['total_likes','liked_by_user','latest_comment'];
 
     public function user(){
         return $this->belongsTo(User::class);
@@ -34,5 +34,16 @@ class Post extends Model{
 
     public function getTotalLikesAttribute(){
         return $this->likes->count();
+    }
+    public function getLatestCommentAttribute(){
+        return Comment::wherePostId($this->id)
+                    ->orderBy('id','desc')->first();
+    }
+    public function getLikedByUserAttribute(){
+        $user_id = \Auth::user()->id;
+
+        $result = array_search($user_id,array_column($this->likes->toArray(),'user_id'));
+
+        return $result>0;
     }
 }

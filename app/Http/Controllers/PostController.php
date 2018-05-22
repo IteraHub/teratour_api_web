@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Validation\Validator;
 use App\Post;
+use App\Like;
 
 
 class PostController extends Controller
@@ -67,5 +68,44 @@ class PostController extends Controller
                 'errors' => $validator->errors()->all()
             ];
         }
+    }
+
+    public function like(int $post_id = null)
+    {
+        if ($post_id == null) {
+            return response()->json([
+                'status' => false,
+                'msg' => 'You need to select a post'
+            ], 400);
+        }
+        $user_id = \Auth::user()->id;
+        $hasLiked = Like::find([
+            'post_id' => $post_id,
+            'user_id' => $user_id,
+        ])->first();
+
+        if ($hasLiked) {
+            return response()->json([
+                'status' => false,
+                'msg' => 'Post already liked'
+            ], 400);
+        }
+
+        $like = new Like([
+            'post_id' => $post_id,
+            'user_id' => $user_id
+        ]);
+        if (!$like->save) {
+            return response()->json([
+                'status' => false,
+                'msg' => 'Could not like due to an error'
+            ], 400);
+        }
+        return response()->json(
+            [
+                'satus' => true,
+                "msg" => "liked"
+            ]
+        );
     }
 }
