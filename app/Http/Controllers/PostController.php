@@ -88,7 +88,7 @@ class PostController extends Controller
             return response()->json([
                 'status' => false,
                 'msg' => 'Post already liked'
-            ], 400);
+            ]);
         }
 
         $like = new Like([
@@ -115,7 +115,7 @@ class PostController extends Controller
             return response()->json([
                 'status' => false,
                 'msg' => 'You need to select a post'
-            ], 400);
+            ]);
         }
         $user_id = \Auth::user()->id;
         $hasLiked = Like::where([
@@ -127,7 +127,7 @@ class PostController extends Controller
             return response()->json([
                 'status' => false,
                 'msg' => 'has not liked'
-            ], 400);
+            ]);
         }
 
         if(!$hasLiked->delete()){
