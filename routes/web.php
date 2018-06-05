@@ -22,3 +22,7 @@ $router->post('/posts','PostController@store');
 
 $router->get('/posts/{post}/comments','CommentController@index');
 $router->post('/posts/{post}/comments','CommentController@store');
+
+
+$router->get('/posts/{post_id}/like','PostController@like');
+$router->get('/posts/{post_id}/unlike','PostController@unlike');
