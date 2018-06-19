@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Validation\Validator;
 use App\Post;
 use App\Like;
-
+use App\Media;
 
 class PostController extends Controller
 {
@@ -24,7 +24,7 @@ class PostController extends Controller
     //
     public function index()
     {
-        $result = Post::with('user')->get();
+        $result = Post::with(['user','media'])->get();
         return [
             'status' => true,
             'data' => $result
@@ -38,6 +38,7 @@ class PostController extends Controller
         $validator = new Validator($data, [
             'text' => 'required|min:6|string',
             'title' => 'required|min:2|string',
+            'media_url'=>'url'
         ]);
         if (!$validator->fails()) {
             $post = new Post();
@@ -47,6 +48,11 @@ class PostController extends Controller
             $post->post_id = $data['post_id'];
 
             if ($post->save()) {
+                if(isset($data['media_url'])){
+                    $media = new Media();
+                    $media->media_url = $data['media_url'];
+                    $post->media->save($media);
+                }
                 return [
                     'status' => true,
                     'message' => 'Post saved',
