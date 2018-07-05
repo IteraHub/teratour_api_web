@@ -35,6 +35,7 @@ class Post extends Model{
     public function getTotalLikesAttribute(){
         return $this->likes->count();
     }
+    
     public function getLatestCommentAttribute(){
         return Comment::with(['user'=>function($q){
            $q->select([
@@ -47,6 +48,7 @@ class Post extends Model{
         }])->wherePostId($this->id)
                     ->orderBy('id','desc')->first();
     }
+    
     public function getLikedByUserAttribute(){
         $user_id = \Auth::user()->id;
 

@@ -17,6 +17,8 @@ use Illuminate\Http\Request;
 
 $router->post('/user/register','UserController@register');
 $router->get('/user','UserController@index');
+$router->put('/user','UserController@update');
+$router->put('/user/changepassword','UserController@updatePassword');
 $router->get('/posts','PostController@index');
 $router->post('/posts','PostController@store');
 

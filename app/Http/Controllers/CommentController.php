@@ -21,7 +21,7 @@ class CommentController extends Controller
 
     //
     public function index($post){
-        $result =  Post::with(['user','comments'])->find($post);
+        $result =  Comment::wherePostId($post)->with(['user'])->find();
         return [
             'status'=>true,
             'data'=>$result
