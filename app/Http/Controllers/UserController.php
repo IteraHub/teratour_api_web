@@ -168,7 +168,7 @@ class UserController extends Controller{
     private function upValidator($data){
         return Validator::make($data,[
             'firstname'=>'required|string|min:2', 
-            'email'=>'required|email|unique:users,email',
+            'email'=>'required|emails',
             'lastname'=>'required|string|min:2',
             'username'=>'required|string|unique:users,username',
             'image_url'=>'nullable|string|url',

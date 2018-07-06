@@ -21,7 +21,7 @@ class CommentController extends Controller
 
     //
     public function index($post){
-        $result =  Comment::wherePostId($post)->with(['user'])->find();
+        $result =  Comment::wherePostId($post)->with('user')->get();
         return [
             'status'=>true,
             'data'=>$result
@@ -37,7 +37,7 @@ class CommentController extends Controller
             'post_id'=>'exist:post,id|numeric'
         ]);
 
-        if($validator->valid()){
+        if($validator->validate()){
             $comment = new Comment();
             $comment->text = $data['text'];
             $comment->user_id = $data['user_id'];
