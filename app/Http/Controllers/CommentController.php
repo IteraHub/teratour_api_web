@@ -1,9 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Support\Facades\Request;
-use Illuminate\Validation\Validator;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Post;
 use App\Comment;
 
@@ -29,18 +28,20 @@ class CommentController extends Controller
     }
 
     public function store(Request $request,$post){
-        $data = $request->all(['text','user_id']);
+        $data = $request->all(['text']);
         $data['post_id'] = $post;
-        $validator = new Validator($data,[
+        $validator = Validator::make($data,[
             'text'=>'required|min:6|string',
-            'user_id'=>'exist:user,id|numeric',
-            'post_id'=>'exist:post,id|numeric'
+            'post_id'=>'exists:posts,id|numeric'
+        ],[
+            'text' =>"You need the text field to comment",
+            'post_id'=>'Invalid Post value'
         ]);
 
-        if($validator->validate()){
+        if(!$validator->fails()){
             $comment = new Comment();
             $comment->text = $data['text'];
-            $comment->user_id = $data['user_id'];
+            $comment->user_id = \Auth::user()->id;
             $comment->post_id = $data['post_id'];
             
             if($comment->save()){
@@ -52,18 +53,17 @@ class CommentController extends Controller
 
             }
 
-            return [
+            return response()->json( [
                 'status'=>false,
                 'message'=>'unable to save comment. Please try again'
-            ];
+            ],400);
         }else{
             //invalid data
-
-            return [
+           return response()->json([
                 'status'=>false,
                 'message'=>'Incorrect or incomplete data',
-                'errors'=>$validator->errors()->all()
-            ];
+                'errors'=>$validator->messages()->toArray()
+            ],400);
         }
     }
 }

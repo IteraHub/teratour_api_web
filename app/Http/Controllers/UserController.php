@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 
@@ -22,7 +23,7 @@ class UserController extends Controller{
             'image_url','dob','about','coverphoto_url',
             'location','password','password_confirmation' 
         ]);
-
+       
         $validator = $this->validater($data);
         
 
@@ -70,14 +71,11 @@ class UserController extends Controller{
 
             if(!$user) return response()->json(['status'=>false,'message'=>'unknown user'],403);
 
-            $user->firstname = $data['firstname'] || $user->firstname;
-            $user->email = $data['email'] || $user->email;
-            $user->lastname = $data['username'] || $user->lastname;
-            $user->image_url = $data['image_url'] || $user->image_url;
-            $user->dob = $data['dob'] || $user->dob;
-            $user->about = $data['about'] || $user->about;
-            $user->coverphoto_url = $data['coverphoto_url'] || $user->coverphoto_url;
-            $user->location = $data['location'] || $user->location;
+            foreach ($data as $key=>$value){
+                if($value){
+                    $user[$key] = $value;
+                }
+            }
 
             if($user->save()){
                 return response()->json([
@@ -157,7 +155,7 @@ class UserController extends Controller{
             'lastname'=>'required|string|min:2',
             'username'=>'required|string|unique:users,username',
             'image_url'=>'nullable|string|url',
-            'dob'=>'nullable|date',
+            'dob'=>'nullable',
             'about'=>'nullable|string',
             'coverphoto_url'=>'nullable|url',
             'location'=>'nullable|string',
@@ -167,12 +165,12 @@ class UserController extends Controller{
 
     private function upValidator($data){
         return Validator::make($data,[
-            'firstname'=>'required|string|min:2', 
-            'email'=>'required|emails',
-            'lastname'=>'required|string|min:2',
-            'username'=>'required|string|unique:users,username',
+            'firstname'=>'nullable|string|min:2', 
+            'email'=>'nullable|emails',
+            'lastname'=>'nullable|string|min:2',
+            'username'=>'nullable|string|unique:users,username',
             'image_url'=>'nullable|string|url',
-            'dob'=>'nullable|date',
+            'dob'=>'nullable',
             'about'=>'nullable|string',
             'coverphoto_url'=>'nullable|url',
             'location'=>'nullable|string',

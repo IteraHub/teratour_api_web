@@ -44,7 +44,7 @@ class AuthServiceProvider extends ServiceProvider
                                 ->orWhere('email',$details->username)
                                 ->first();
 
-                if(Hash::check($details->password,$user->password)){
+                if($user&&Hash::check($details->password,$user->password)){
                     return $user;
                 }
             }

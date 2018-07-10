@@ -8,6 +8,30 @@ use App\Comment;
 use App\Media;
 use App\Like;
 
+/**
+ * App\Post
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property string $title
+ * @property string $text
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Comment[] $comments
+ * @property-read mixed $latest_comment
+ * @property-read mixed $liked_by_user
+ * @property-read mixed $total_likes
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Like[] $likes
+ * @property-read \App\Media $media
+ * @property-read \App\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Post whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Post whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Post whereText($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Post whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Post whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Post whereUserId($value)
+ * @mixin \Eloquent
+ */
 class Post extends Model{
 
     protected $fillabel = [
