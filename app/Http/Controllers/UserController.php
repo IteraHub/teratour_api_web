@@ -29,7 +29,7 @@ class UserController extends Controller{
 
         if(!$validator->fails()){
             $user = new User($data);
-            $user->password = \Hash::make($data['password']);
+            $user->password = Hash::make($data['password']);
 
             if($user->save()){
                 return response()->json([
