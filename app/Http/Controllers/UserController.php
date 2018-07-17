@@ -104,7 +104,7 @@ class UserController extends Controller{
 
     public function updatePassword(Request $request)
     {
-        $data = $request->all(['password','password_confirmation']);
+        $data = $request->all(['password','current_password']);
         $validator = Validator::make($data,
                         [
                             'current_password'=>'required|string|min:6',
