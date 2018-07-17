@@ -14,6 +14,11 @@ use Illuminate\Http\Request;
 /**
  * @var Illuminate\Support\Facades\Route $router
  */
+$router->get('/',function(){
+    return [
+        'msg'=>'welcome'
+    ];
+});
 
 $router->post('/user/register','UserController@register');
 $router->get('/user','UserController@index');
