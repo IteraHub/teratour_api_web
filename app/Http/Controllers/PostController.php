@@ -31,6 +31,15 @@ class PostController extends Controller
         ];
     }
 
+    public function view($post_id)
+    {
+        $result = Post::with(['user','media'])->find($post_id);
+        return [
+            'status' => true,
+            'data' => $result
+        ];
+    }
+
     public function store(Request $request)
     {
         $data = $request->all(['text', 'user_id', 'title']);

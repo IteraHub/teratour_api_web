@@ -35,6 +35,6 @@ $router->get('/test',function (){
         'status'=>true
     ]);
 });
-
+$router->get('/posts/{post_id}','PostController@view ');
 $router->get('/posts/{post_id}/like','PostController@like');
 $router->get('/posts/{post_id}/unlike','PostController@unlike');

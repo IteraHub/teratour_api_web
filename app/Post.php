@@ -76,8 +76,7 @@ class Post extends Model{
     public function getLikedByUserAttribute(){
         $user_id = \Auth::user()->id;
 
-        $result = array_search($user_id,array_column($this->likes->toArray(),'user_id'));
-
-        return $result>0;
+        $result = $this->likes->where('user_id',$user_id)->first();
+        return $result?true:false;
     }
 }
