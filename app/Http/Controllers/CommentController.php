@@ -31,7 +31,7 @@ class CommentController extends Controller
         $data = $request->all(['text']);
         $data['post_id'] = $post;
         $validator = Validator::make($data,[
-            'text'=>'required|min:6|string',
+            'text'=>'required|min:1|string',
             'post_id'=>'exists:posts,id|numeric'
         ],[
             'text' =>"You need the text field to comment",
