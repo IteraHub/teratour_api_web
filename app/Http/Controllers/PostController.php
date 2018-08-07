@@ -118,7 +118,7 @@ class PostController extends Controller
         }
         return response()->json(
             [
-                'satus' => true,
+                'status' => true,
                 "msg" => "liked"
             ]
         );
