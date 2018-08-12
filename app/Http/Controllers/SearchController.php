@@ -14,6 +14,18 @@ use App\Post;
 
 class SearchController extends Controller
 {
+    /**
+     * SearchController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function index(Request $request)
     {
         $query = $request->query('q');
