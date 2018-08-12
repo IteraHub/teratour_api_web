@@ -38,3 +38,5 @@ $router->get('/test',function (){
 
 $router->get('/posts/{post_id}/like','PostController@like');
 $router->get('/posts/{post_id}/unlike','PostController@unlike');
+
+$router->get('/search','SearchController@index');
