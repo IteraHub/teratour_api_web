@@ -104,7 +104,7 @@ class UserController extends Controller{
 
     public function updatePassword(Request $request)
     {
-        $data = $request->all(['password','password_confirmation']);
+        $data = $request->all(['password','current_password','password_confirmation']);
         $validator = Validator::make($data,
                         [
                             'current_password'=>'required|string|min:6',
@@ -166,7 +166,7 @@ class UserController extends Controller{
     private function upValidator($data){
         return Validator::make($data,[
             'firstname'=>'nullable|string|min:2', 
-            'email'=>'nullable|emails',
+            'email'=>'nullable|email|unique:users,email',
             'lastname'=>'nullable|string|min:2',
             'username'=>'nullable|string|unique:users,username',
             'image_url'=>'nullable|string|url',
