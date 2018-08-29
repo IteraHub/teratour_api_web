@@ -8,7 +8,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 use App\User;
 use App\Post;
 
