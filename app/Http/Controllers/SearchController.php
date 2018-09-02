@@ -38,7 +38,7 @@ class SearchController extends Controller
             ],400);
         }
 
-        $posts = Post::where("title",'like',"%{$query}%")->get();
+        $posts = Post::with(['user','media'])->where("title",'like',"%{$query}%")->get();
         $users = User::where("username",'like',"%{$query}%")
                 ->select(['id','username','firstname','lastname','about'])
                 ->get();
